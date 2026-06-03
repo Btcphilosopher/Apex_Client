@@ -1,0 +1,49 @@
+package com.example.ui.theme
+
+import android.os.Build
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.ui.graphics.Color
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+
+private val DarkColorScheme =
+  darkColorScheme(
+    primary = ApexNeonMint,
+    secondary = ApexCyan,
+    tertiary = ApexCyberGold,
+    background = ApexObsidian,
+    surface = ApexDeepDark,
+    surfaceVariant = ApexCardDark,
+    onPrimary = ApexObsidian,
+    onSecondary = ApexObsidian,
+    onBackground = Color.White,
+    onSurface = Color.White,
+    onSurfaceVariant = Color(0xFFE2E4E9)
+  )
+
+private val LightColorScheme = DarkColorScheme // Strictly dark for a immersive gaming OS launcher environment
+
+@Composable
+fun MyApplicationTheme(
+  darkTheme: Boolean = true, // Force dark theme for visual immersive fidelity
+  // Dynamic color is available on Android 12+ (turn off by default to maintain neon branding consistency)
+  dynamicColor: Boolean = false,
+  content: @Composable () -> Unit,
+) {
+  val colorScheme =
+    when {
+      dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+        val context = LocalContext.current
+        dynamicDarkColorScheme(context)
+      }
+
+      else -> DarkColorScheme
+    }
+
+  MaterialTheme(colorScheme = colorScheme, typography = Typography, content = content)
+}

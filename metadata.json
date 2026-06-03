@@ -1,0 +1,6 @@
+{
+  "name": "Apex Client",
+  "description": "Desktop-style gaming operating system and launcher environment on Android.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
